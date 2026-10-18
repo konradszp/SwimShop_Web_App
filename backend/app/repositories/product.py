@@ -1,6 +1,6 @@
 from typing import List
-from repositories.base import BaseRepository
-from models.product import Product
+from app.repositories.base import BaseRepository
+from app.models.product import Product
 
 class ProductRepository(BaseRepository):
     def get_all(self) -> List[Product]:

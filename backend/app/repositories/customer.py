@@ -1,4 +1,4 @@
-from database import get_connection
+from backend.database import get_connection
 from models.customer import Customer
 
 class CustomerRepository:

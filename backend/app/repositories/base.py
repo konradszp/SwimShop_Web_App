@@ -1,4 +1,4 @@
-from database import get_connection
+from app.database import get_connection
 
 class BaseRepository:
     def execute_query(self, query: str, params: tuple = ()):

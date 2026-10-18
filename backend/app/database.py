@@ -1,6 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
-from backend.config import DB_CONFIG
+from app.config import DB_CONFIG
 
 def get_connection():
     try:
