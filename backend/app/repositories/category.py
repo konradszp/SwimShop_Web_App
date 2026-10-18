@@ -1,6 +1,6 @@
 from typing import List, Optional
-from models.category import Category
-from repositories.base import BaseRepository
+from app.models.category import Category
+from app.repositories.base import BaseRepository
 
 class CategoryRepository(BaseRepository):
     def get_all(self) -> List[Category]:
