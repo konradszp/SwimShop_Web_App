@@ -31,6 +31,33 @@ class ProductRepository(BaseRepository):
             )
         return products
 
+    def get_by_id(self, product_id: int) -> Product | None:
+        query = """
+            SELECT product.*, category.name AS category_name
+            FROM products product
+            LEFT JOIN categories category ON product.category_id = category.category_id
+            WHERE product.product_id = %s
+        """
+
+        rows = self.execute_query(query, (product_id,))
+        if not rows:
+            return None
+
+        row = rows[0]
+        return Product(
+            product_id=row['product_id'],
+            category_id=row['category_id'],
+            category_name=row.get('category_name'),
+            name=row['name'],
+            brand=row['brand'],
+            price=float(row['price']),
+            cost_price=float(row['cost_price']),
+            stock_quantity=row['stock_quantity'],
+            min_stock_level=row.get('min_stock_level'),
+            size=row.get('size'),
+            description=row.get('description')
+        )
+
     def get_by_category(self, category_id: int) -> List[Product]:
         query = "SELECT * FROM products WHERE category_id = %s ORDER BY name ASC"
         rows = self.execute_query(query, (category_id,))
