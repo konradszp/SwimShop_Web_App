@@ -1,4 +1,4 @@
-from backend.app.database import get_connection
+from app.database import get_connection
 from app.models.order import Order, OrderItem, OrderStatus
 
 class OrderRepository:
@@ -122,3 +122,23 @@ class OrderRepository:
                 pass
 
 
+    def update_status(self, order_id: int, status: OrderStatus) -> bool:
+        conn = get_connection()
+        if not conn:
+            return False
+
+        cursor = conn.cursor()
+        try:
+            cursor.execute(
+            "UPDATE orders SET status = %s WHERE order_id = %s",
+            (status.value, order_id),
+            )
+            conn.commit()
+            return cursor.rowcount > 0
+        except Exception as e:
+            conn.rollback()
+            print(f"[OrderRepository] Failed to update status: {e}")
+            return False
+        finally:
+            cursor.close()
+            conn.close()
