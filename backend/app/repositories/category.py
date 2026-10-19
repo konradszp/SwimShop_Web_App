@@ -30,7 +30,7 @@ class CategoryRepository(BaseRepository):
 
     def create(self, name: str) -> int:
         query = "INSERT INTO categories (name) VALUES (%s)"
-        return self.execute_statement(query, (name,))
+        return self.execute_insert(query, (name,))
 
     def update(self, category_id: int, name: str) -> bool:
         query = "UPDATE categories SET name = %s WHERE category_id = %s"
