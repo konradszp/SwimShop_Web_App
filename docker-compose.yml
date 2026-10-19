@@ -33,6 +33,7 @@ services:
       - DB_NAME=SwimShop
       - DB_USER=user
       - DB_PASSWORD=password
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
     depends_on:
       db:
         condition: service_healthy
