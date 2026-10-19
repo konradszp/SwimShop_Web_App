@@ -5,5 +5,5 @@ class Customer:
     customer_id: int
     full_name: str
     email: str
-    phone: int
+    phone: str
     address: str
