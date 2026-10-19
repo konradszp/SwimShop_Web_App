@@ -6,6 +6,10 @@ from datetime import datetime
 from app.repositories.order import OrderRepository
 from app.models.order import Order, OrderItem, OrderStatus
 
+from fastapi import Depends
+from app.routers.auth import get_current_user
+from app.models.user import User
+
 router = APIRouter(
     prefix="/orders",
     tags=["orders"]
@@ -64,7 +68,7 @@ def get_order(order_id: int):
     return order
 
 @router.post("/", response_model=OrderResponse, status_code=201)
-def create_order(order_data: OrderCreate):
+def create_order(order_data: OrderCreate, current_user: User = Depends(get_current_user)):
     if not order_data.items:
         raise HTTPException(status_code=400, detail="Order must contain at least one item")
 
@@ -98,7 +102,7 @@ def create_order(order_data: OrderCreate):
     return created
 
 @router.patch("/{order_id}/status", response_model=OrderResponse)
-def update_order_status(order_id: int, status_update: OrderStatusUpdate):
+def update_order_status(order_id: int, status_update: OrderStatusUpdate, current_user: User = Depends(get_current_user)):
     existing_order = order_repository.get_by_id(order_id)
     if not existing_order:
         raise HTTPException(status_code=404, detail="Order not found")

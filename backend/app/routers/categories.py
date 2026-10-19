@@ -4,6 +4,10 @@ from pydantic import BaseModel
 
 from app.repositories.category import CategoryRepository
 
+from fastapi import Depends
+from app.routers.auth import get_current_user
+from app.models.user import User
+
 router = APIRouter(
     prefix="/categories",
     tags=["categories"]
@@ -35,7 +39,7 @@ def get_category(category_id: int):
     return category
 
 @router.post("/", response_model=CategoryResponse)
-def create_category(category: CategoryCreate):
+def create_category(category: CategoryCreate, current_user: User = Depends(get_current_user)):
     success = category_repository.create(category.name)
 
     if not success:
@@ -49,7 +53,7 @@ def create_category(category: CategoryCreate):
     raise HTTPException(status_code=500, detail="Category created but could not be retrieved")
 
 @router.put("/{category_id}", response_model=CategoryResponse)
-def update_category(category_id: int, category: CategoryCreate):
+def update_category(category_id: int, category: CategoryCreate, current_user: User = Depends(get_current_user)):
     existing = category_repository.get_by_id(category_id)
 
     if not existing:
@@ -63,7 +67,7 @@ def update_category(category_id: int, category: CategoryCreate):
     return category_repository.get_by_id(category_id)
 
 @router.delete("/{category_id}")
-def delete_category(category_id: int):
+def delete_category(category_id: int, current_user: User = Depends(get_current_user)):
     existing = category_repository.get_by_id(category_id)
 
     if not existing:

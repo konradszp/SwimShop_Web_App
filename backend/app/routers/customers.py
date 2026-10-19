@@ -4,6 +4,10 @@ from pydantic import BaseModel, EmailStr
 
 from app.repositories.customer import CustomerRepository
 
+from fastapi import Depends
+from app.routers.auth import get_current_user
+from app.models.user import User
+
 router = APIRouter(
     prefix="/customers",
     tags=["customers"]
@@ -46,7 +50,7 @@ def get_customer(customer_id: int):
 
 
 @router.post("/", response_model=CustomerResponse, status_code=201)
-def create_customer(customer: CustomerCreate):
+def create_customer(customer: CustomerCreate, current_user: User = Depends(get_current_user)):
     customer_id = customer_repository.create(
         full_name=customer.full_name,
         email=customer.email,
@@ -64,7 +68,7 @@ def create_customer(customer: CustomerCreate):
     return new_customer
 
 @router.put("/{customer_id}", response_model=CustomerResponse)
-def update_customer(customer_id: int, customer: CustomerCreate):
+def update_customer(customer_id: int, customer: CustomerCreate, current_user: User = Depends(get_current_user)):
     existing_customer = customer_repository.get_by_id(customer_id)
     if not existing_customer:
         raise HTTPException(status_code=404, detail="Customer not found")
@@ -82,7 +86,7 @@ def update_customer(customer_id: int, customer: CustomerCreate):
     return customer_repository.get_by_id(customer_id)
 
 @router.delete("/{customer_id}")
-def delete_customer(customer_id: int):
+def delete_customer(customer_id: int, current_user: User = Depends(get_current_user)):
     existing_customer = customer_repository.get_by_id(customer_id)
     if not existing_customer:
         raise HTTPException(status_code=404, detail="Customer not found")
