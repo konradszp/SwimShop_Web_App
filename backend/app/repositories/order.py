@@ -1,5 +1,5 @@
 from backend.app.database import get_connection
-from models.order import Order, OrderItem, OrderStatus
+from app.models.order import Order, OrderItem, OrderStatus
 
 class OrderRepository:
 
