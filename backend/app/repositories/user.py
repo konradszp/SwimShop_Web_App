@@ -1,6 +1,6 @@
-from repositories.base import BaseRepository
-from models.user import User, UserRole
-from utils.security import hash_password, verify_password
+from app.repositories.base import BaseRepository
+from app.models.user import User, UserRole
+from app.utils.security import hash_password, verify_password
 
 
 class UserRepository(BaseRepository):
@@ -18,7 +18,7 @@ class UserRepository(BaseRepository):
             )
         return None
 
-    def authenticate(self, username, password):
+    def authenticate(self, username: str, password: str)-> User | None:
         user = self.get_by_username(username)
         if user and verify_password(password, user.password_hash):
             return user
