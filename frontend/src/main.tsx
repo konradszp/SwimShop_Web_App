@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Products from './Products'
+import Login from './Login'
 import './style.css'
 
 function Home() {
@@ -36,10 +37,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Link to="/" className="nav-brand">Swimshop</Link>
       <Link to="/">Home</Link>
       <Link to="/products">Products</Link>
+      <Link to="/login">Login</Link>
     </nav>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/login" element={<Login />}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -164,3 +164,75 @@ body {
 .error {
     color: #c0392b;
 }
+
+/***********   Login Page    ************/
+
+.login-page {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh-60px);
+    padding: 2rem;
+}
+
+.login-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.login-box h1 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #0a4d68;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.foprm-group input:focus{
+    outline: none;
+    border-color: #0a4d68;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 0.75rem;
+    background: 0a4d68;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.login-box button:hover:not(:disabled) {
+    background: #083d54;
+}
+
+.login-box button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
