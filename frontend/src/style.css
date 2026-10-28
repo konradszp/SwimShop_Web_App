@@ -1,0 +1,166 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #222;
+    background: #fafafa;
+}
+
+.nav {
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #e0e0e0;
+    background: #f8fdff;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-brand {
+    color: #0a4d68;
+    text-decoration: None;
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+.nav a {
+    color: #333;
+    text-decoration: None;
+}
+
+.nav a:hover {
+    color: #0a4d68;
+}
+
+.home {
+    padding: 2rem;
+    max-width:900px;
+    margin: 0 auto;
+}
+
+.home .subtitle {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.cards {
+    display: grid;
+    gap:1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.card {
+    display: block;
+    padding: 1.25rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-decoration: none;
+    background: #f8fdff;
+    color: inherit;
+    transition: box-shadow 0.15s;
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card.disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.card.disabled:hover {
+    box-shadow: None;
+}
+
+.card h3 {
+    margin: 0 0 0.5rem;
+    color: #0a4d68;
+}
+
+.card p {
+    margin: 0;
+    color: #666;
+}
+
+.products-page {
+    padding:2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.products-page h1 {
+    color: #0a4d68;
+}
+
+.filter-row {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.filter-row select {
+    padding: 0.5rem 0.7rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.product-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1rem;
+    background: #fff;
+}
+
+.product-card h3 {
+    margin: 0 0 0.5rem;
+}
+
+.product-card .brand {
+    margin: 0.25rem 0;
+    color: #555;
+}
+
+.product-card .price {
+    margin: 0.25rem 0;
+    font-weight: 600;
+}
+
+.product-card .stock {
+    margin: 0.25rem 0;
+}
+
+.product-card .meta {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.badge {
+    margin-left: 0.5rem;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.badge.low {
+    color: #e67e00;
+}
+
+.badge-out {
+    color: #c0392b;
+}
+
+.error {
+    color: #c0392b;
+}

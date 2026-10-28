@@ -57,13 +57,11 @@ export default function Products() {
     }, [selectedCategory])
 
 return (
-    <div style={{ padding: '2rem'}}>
+    <div className="products-page">
         <h1>Products</h1>
 
-        <div style={{marginBottom: '2rem'}}>
-            <label htmlFor='category' style={{marginRight: '1rem'}}>
-                Filter by category:
-            </label>
+        <div className="filter-row">
+            <label htmlFor='category'>Filter by category:</label>
             <select
                 id="Category"
                 value={selectedCategory ?? ''}
@@ -71,7 +69,6 @@ return (
                     const value = e.target.value
                     setSelectedCategory(value ? Number(value) : null)
                 }}
-                style={{padding: '0.5rem 0.7rem'}}
                 >
                     <option value="">All categories</option>
                     {categories.map((cat) => (
@@ -83,47 +80,38 @@ return (
         </div>
 
         {loading && <div>Loading products...</div>}
-        {error && <div style={{ color: 'red'}}>{error}</div>}
+        {error && <div className="error">{error}</div>}
 
         {!loading && !error && (
             <>
                 {products.length === 0 ? (
                     <p>No products found</p>
                 ) : (
-                    <div style={{
-                        display: 'grid',
-                        gap: '1rem',
-                        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))'
-                    }}>
+                    <div className="product-grid">
                         {products.map((product) => (
-                            <div key={product.product_id} style={{
-                                border: '1px solid #ddd',
-                                borderRadius: '10px',
-                                padding: '1rem',
-                                background: product.out_of_stock ? '#fff5f5' : 'fff',
-                            }}>
-                            <h3 style={{margin: '0 0 0.5rem'}}>{product.name}</h3>
-                            <p style={{margin:'0.25rem 0', color: '#555'}}>{product.brand}</p>
-                            <p style={{margin: '0.25rem 0'}}>
-                                <strong>${product.price.toFixed(2)}</strong>
-                            </p>
-                            <p style={{margin: '0.25rem 0', fontSize: '1rem'}}>
-                                Stock: {product.stock_quantity}
-                                {product.low_stock && (
-                                    <span style={{color: 'orange', marginLeft: '0.5rem'}}>Low stock</span>
-                                )}
-                                {product.out_of_stock && (
-                                    <span style={{color: 'red', marginLeft: '0.5rem'}}>Out of Stock</span>
-                                )}
-                            </p>
-                            {product.category_name && (
-                                <p style={{margin: '0.25rem 0', fontSize: '1rem', color: '#777'}}>
-                                    Category: {product.category_name}
+                            <div 
+                                key={product.product_id}
+                                className="product-card"
+                                style={{background: product.out_of_stock ? '#fff5f5' : undefined}}
+                            >
+                                <h3>{product.name}</h3>
+                                <p className="brand">{product.brand}</p>
+                                <p className="price">${product.price.toFixed(2)}</p>
+                                <p className="stock">
+                                    Stock: {product.stock_quantity}
+                                    {product.low_stock && (
+                                        <span className="badge low">Low stock</span>
+                                    )}
+                                    {product.out_of_stock && (
+                                        <span className="badge out">Out of Stock</span>
+                                    )}
                                 </p>
-                            )}
-                            {product.size && (
-                                <p style={{ margin: '0.25rem 0', fontSize: '1rem'}}>Size: {product.size}</p>
-                            )}
+                                {product.category_name && (
+                                    <p className="meta">Category: {product.category_name}</p>
+                                )}
+                                {product.size && (
+                                    <p className="meta">Size: {product.size}</p>
+                                )}
                             </div>
                         ))}
                     </div>

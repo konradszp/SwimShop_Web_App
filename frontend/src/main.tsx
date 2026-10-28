@@ -2,13 +2,29 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import Products from './Products'
+import './style.css'
 
 function Home() {
   return(
-    <div>
+    <div className="home">
       <h1>SwimShop</h1>
-      <p>Home Page</p>
-      <Link to="/products">Products</Link>
+      <p className="subtitle">Swimming gear POS system</p>
+      <div className="cards">
+        <Link to="/products" className="card">
+          <h3>Products</h3>
+          <p>View and filter inventory</p>
+        </Link>
+
+        <div className="card disabled">
+          <h3>Orders</h3>
+          <p>...</p>
+        </div>
+
+        <Link to="/products" className="card">
+          <h3>Low Stock</h3>
+          <p>Check items that need restock</p>
+        </Link>
+      </div>
     </div>
   )
 }
@@ -16,8 +32,9 @@ function Home() {
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
-    <nav style={{padding:'1rem', borderBottom: '1px solid #ccc'}}>
-      <Link to="/" style={{ marginRight: '1rem'}}>Home</Link>
+    <nav className="nav">
+      <Link to="/" className="nav-brand">Swimshop</Link>
+      <Link to="/">Home</Link>
       <Link to="/products">Products</Link>
     </nav>
       <Routes>
